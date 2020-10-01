@@ -1,7 +1,17 @@
 const express = require('express')
 const usersController = express.Router()
+const { AuthMiddleware } = require('../../middleware')
+const { Validation } = require('../../utils')
+const { ValidateBody, Schemas } = Validation
 
-usersController.post('/auth/register')
+usersController.post(
+    '/auth/register',
+    ValidateBody(Schemas.RegisterUser),
+    AuthMiddleware.register,
+    AuthMiddleware.assignRole,
+    AuthMiddleware.signRefreshTokenForUser,
+    AuthMiddleware.signJWTForUser
+)
 
 usersController.post('/auth/login')
 
