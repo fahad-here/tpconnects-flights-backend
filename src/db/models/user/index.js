@@ -3,25 +3,34 @@ const Schema = mongoose.Schema
 const passportLocalMongoose = require('passport-local-mongoose')
 const findOrCreate = require('mongoose-findorcreate')
 
-const UserSchema = new Schema({
-    name: {
-        type: String,
-        required: true
+const UserSchema = new Schema(
+    {
+        name: {
+            type: String,
+            required: true
+        },
+        email: {
+            type: String,
+            required: true
+        },
+        role: {
+            type: Schema.Types.ObjectId,
+            ref: 'Role'
+        },
+        roleName: {
+            type: String
+        },
+        roleRank: {
+            type: Number
+        }
     },
-    email: {
-        type: String,
-        required: true
-    },
-    role: {
-        type: Schema.Types.ObjectId
-    },
-    roleName: {
-        type: String
-    },
-    roleRank: {
-        type: Number
+    {
+        timestamps: {
+            createdAt: 'createdAt',
+            updatedAt: 'updatedAt'
+        }
     }
-})
+)
 UserSchema.plugin(findOrCreate)
 UserSchema.plugin(passportLocalMongoose, {
     usernameField: 'email', // Use email, not the default 'username'
