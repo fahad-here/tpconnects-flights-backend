@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const http = require('http')
 const logger = require('morgan')
+const { DBConnect } = require('./src/db')
 const { RouteErrorHandler } = require('./src/utils')
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+DBConnect()
 
 app.get('/api', (req, res)=>{
     return res.send({
