@@ -3,8 +3,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const http = require('http')
 const logger = require('morgan')
+const cors = require('cors')
 const { DBConnect } = require('./src/db')
 const { RouteErrorHandler } = require('./src/utils')
+const { CORS_CONFIG } = require('./src/config')
+
 const app = express()
 
 const PORT = 3000
@@ -15,6 +18,8 @@ app.set('view engine', 'ejs')
 app.use(logger('dev'))
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(cors(CORS_CONFIG))
 
 DBConnect()
 
