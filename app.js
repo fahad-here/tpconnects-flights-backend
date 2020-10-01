@@ -7,6 +7,7 @@ const cors = require('cors')
 const { DBConnect } = require('./src/db')
 const { RouteErrorHandler } = require('./src/utils')
 const { CORS_CONFIG } = require('./src/config')
+const indexRouter = require('./src/routes/index')
 
 const app = express()
 
@@ -23,11 +24,7 @@ app.use(cors(CORS_CONFIG))
 
 DBConnect()
 
-app.get('/api', (req, res)=>{
-    return res.send({
-        message: 'success'
-    })
-})
+app.use('/api', indexRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
