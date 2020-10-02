@@ -1,11 +1,5 @@
 const { DBSchemas } = require('../../db')
-const {
-    UserSchema,
-    RoleSchema,
-    TokenSchema,
-    PermissionSchema,
-    RolePermissionSchema
-} = DBSchemas
+const { RoleSchema, PermissionSchema, RolePermissionSchema } = DBSchemas
 const { ResponseMessage } = require('../../utils')
 
 async function createNewPermission(req, res, next) {

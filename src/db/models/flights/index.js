@@ -33,6 +33,9 @@ const FlightSchema = new Schema(
         },
         addedBy: {
             type: Schema.Types.ObjectId
+        },
+        lastEditedBy: {
+            type: Schema.Types.ObjectId
         }
     },
     {
