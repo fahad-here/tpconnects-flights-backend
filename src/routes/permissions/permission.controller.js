@@ -1,13 +1,14 @@
 const express = require('express')
-const usersController = express.Router()
+const permissionController = express.Router()
 const { AuthMiddleware, PermissionMiddleware } = require('../../middleware')
-const { Validation, InjectRouteType } = require('../../utils')
-const { ValidateBody, Schemas } = Validation
+const { InjectRouteType } = require('../../utils')
 
-usersController.post(
+permissionController.post(
     '/',
     AuthMiddleware.requireJWT,
     InjectRouteType('addNewPermission'),
     AuthMiddleware.checkPermission,
     PermissionMiddleware.createNewPermission
 )
+
+module.exports = permissionController
