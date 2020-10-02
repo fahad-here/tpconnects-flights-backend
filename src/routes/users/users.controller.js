@@ -28,9 +28,9 @@ usersController.post(
 
 usersController.get(
     '/',
+    AuthMiddleware.requireJWT,
     InjectRouteType('getUser'),
     AuthMiddleware.checkPermission,
-    AuthMiddleware.requireJWT,
     AuthMiddleware.getUser
 )
 
