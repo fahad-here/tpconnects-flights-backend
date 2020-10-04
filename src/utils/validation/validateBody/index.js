@@ -1,5 +1,3 @@
-const Joi = require('joi')
-
 module.exports = (schema, options) => {
     return async (req, res, next) => {
         try {
@@ -7,7 +5,7 @@ module.exports = (schema, options) => {
                 options = {
                     allowUnknown: false
                 }
-            const result = await Joi.validate(req.body, schema, options)
+            const result = await schema.validate(req.body, options)
             if (!req.value) {
                 req.value = {}
             }

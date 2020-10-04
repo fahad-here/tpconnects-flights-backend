@@ -7,7 +7,6 @@ async function addNewFlight(req, res, next) {
         const {
             origin,
             destination,
-            country,
             currency,
             arrival,
             departure,
@@ -31,13 +30,12 @@ async function addNewFlight(req, res, next) {
         const flight = await new FlightSchema({
             origin,
             destination,
-            country,
             currency,
             arrival,
             departure,
             cost,
             addedBy: req.user._id
-        })
+        }).save()
         return res
             .status(200)
             .json(
@@ -53,7 +51,6 @@ async function editFlight(req, res, next) {
         const {
             origin,
             destination,
-            country,
             currency,
             arrival,
             departure,
@@ -80,7 +77,6 @@ async function editFlight(req, res, next) {
                 $set: {
                     origin,
                     destination,
-                    country,
                     currency,
                     arrival,
                     departure,
@@ -100,6 +96,17 @@ async function editFlight(req, res, next) {
     }
 }
 
+async function getFlights(req, res, next) {
+    try {
+        const flights = await FlightSchema.find({})
+        return res
+            .status(200)
+            .json(ResponseMessage(false, 'Successful request', { flights }))
+    } catch (e) {
+        return next(e)
+    }
+}
+
 async function deleteFlight(req, res, next) {
     try {
         const _id = req.params.id
@@ -109,8 +116,8 @@ async function deleteFlight(req, res, next) {
         })
         if (flight)
             return res.status(200).json(
-                ResponseMessage(false, 'Edited flight successfully', {
-                    flight
+                ResponseMessage(false, 'Deleted flight successfully', {
+                    flightId: _id
                 })
             )
         else
@@ -130,5 +137,6 @@ async function deleteFlight(req, res, next) {
 module.exports = {
     addNewFlight,
     editFlight,
-    deleteFlight
+    deleteFlight,
+    getFlights
 }

@@ -58,7 +58,7 @@ async function startUpScript() {
     }
     const SUIndex = findRoleIndex(roles, USER_ROLES.SUPER_ADMIN)
     let newUser = {
-        email: 'test@admin.com',
+        email: 'superadmin@test.com',
         name: 'Test User'
     }
     UserSchema.register(newUser, 'test1234', async (error, user) => {

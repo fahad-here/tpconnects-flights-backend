@@ -4,6 +4,14 @@ const { AuthMiddleware, FlightMiddleware } = require('../../middleware')
 const { Validation, InjectRouteType } = require('../../utils')
 const { ValidateBody, Schemas } = Validation
 
+flightController.get(
+    '/',
+    AuthMiddleware.requireJWT,
+    InjectRouteType('viewFlights'),
+    AuthMiddleware.checkPermission,
+    FlightMiddleware.getFlights
+)
+
 flightController.post(
     '/',
     AuthMiddleware.requireJWT,
