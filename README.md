@@ -32,5 +32,8 @@ $ npm start
 ```
 
 #### Note: The resetDB script clears the roles, users and permissions.
-#### Note: The startup script creates the roles, and a user with the super admin role, along with creating the required permissions. 
+#### Note: The startup script creates the roles, and a user with the super admin role, along with creating the required permissions.
+#### Note: The created user with super admin role. (these can be changed in the script found under ./src/scripts/start.js)
+##### email: superadmin@test.com
+##### password: test1234
 
