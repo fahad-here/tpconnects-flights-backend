@@ -11,7 +11,7 @@ const {
     JWT_REFRESH_ALGORITHM
 } = process.env
 
-const whitelist = ['http://localhost:3000', 'http://127.0.0.1:3000']
+const whitelist = ['http://localhost:3001', 'http://127.0.0.1:3001']
 
 const CORS_CONFIG = {
     origin: (origin, callback) => {

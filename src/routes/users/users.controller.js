@@ -1,7 +1,7 @@
 const express = require('express')
 const usersController = express.Router()
 const { AuthMiddleware } = require('../../middleware')
-const { Validation, InjectRouteType } = require('../../utils')
+const { Validation } = require('../../utils')
 const { ValidateBody, Schemas } = Validation
 
 usersController.post(
@@ -26,12 +26,6 @@ usersController.post(
     AuthMiddleware.signJWTForUser
 )
 
-usersController.get(
-    '/',
-    AuthMiddleware.requireJWT,
-    InjectRouteType('getUser'),
-    AuthMiddleware.checkPermission,
-    AuthMiddleware.getUser
-)
+usersController.get('/', AuthMiddleware.requireJWT, AuthMiddleware.getUser)
 
 module.exports = usersController

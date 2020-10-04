@@ -4,7 +4,7 @@ const { ResponseMessage } = require('../../utils')
 
 async function createNewPermission(req, res, next) {
     try {
-        const { name, description, scope } = req.body
+        let { name, description, scope } = req.body
         const checkPermission = await PermissionSchema.findOne({ name })
         if (checkPermission)
             return res
@@ -32,6 +32,9 @@ async function createNewPermission(req, res, next) {
             scope
         })
         let added = {}
+        if (scope.indexOf(USER_ROLES.SUPER_ADMIN) === -1) {
+            scope = [...scope, 'Super Admin']
+        }
         for (let item of scope) {
             let role = await RoleSchema.findOne({ name: item })
             if (!role) added[item] = false

@@ -1,21 +1,22 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const _ = require('lodash')
-const { PERMISSION_STATES } = require('../../../config')
+const { PERMISSION_STATES } = require('../../../constants')
 
 const RolePermissionSchema = new Schema(
     {
         role: {
-            type: String,
+            type: Schema.Types.ObjectId,
             required: true
         },
         permission: {
-            type: Number,
+            type: Schema.Types.ObjectId,
             required: true
         },
         state: {
             type: String,
-            enum: _.values(PERMISSION_STATES)
+            enum: _.values(PERMISSION_STATES),
+            default: PERMISSION_STATES.INCLUDED
         }
     },
     {

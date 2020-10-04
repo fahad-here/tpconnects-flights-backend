@@ -8,7 +8,7 @@ const PermissionSchema = new Schema(
             required: true
         },
         scope: {
-            type: [Array],
+            type: [String],
             required: true
         },
         description: {
